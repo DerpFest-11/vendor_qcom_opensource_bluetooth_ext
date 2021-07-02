@@ -867,7 +867,7 @@ static void initNative(JNIEnv* env, jobject object,
   mCallbacksObj = env->NewGlobalRef(object);
 }
 
-static void cleanupNative(JNIEnv* env, jobject object) {
+static void cleanupNative(JNIEnv* env, jobject /*object*/) {
   std::unique_lock<std::shared_timed_mutex> lock(callbacks_mutex);
   std::unique_lock<std::shared_timed_mutex> interface_lock(interface_mutex);
   const bt_interface_t* btInf = getBluetoothInterface();
@@ -887,7 +887,7 @@ static void cleanupNative(JNIEnv* env, jobject object) {
   }
 }
 
-static jboolean getPlayStatusRspNative(JNIEnv* env, jobject object,
+static jboolean getPlayStatusRspNative(JNIEnv* env, jobject /*object*/,
                                        jbyteArray address, jint playStatus,
                                        jint songLen, jint songPos) {
   std::unique_lock<std::shared_timed_mutex> interface_lock(interface_mutex);
@@ -915,7 +915,7 @@ static jboolean getPlayStatusRspNative(JNIEnv* env, jobject object,
   env->ReleaseByteArrayElements(address, addr, 0);
   return (status == BT_STATUS_SUCCESS) ? JNI_TRUE : JNI_FALSE;
 }
-static jboolean updatePlayStatusToStack(JNIEnv *env ,jobject object, jint playStatus) {
+static jboolean updatePlayStatusToStack(JNIEnv* /*env*/ ,jobject /*object*/, jint playStatus) {
   ALOGE("%s",__func__);
   std::unique_lock<std::shared_timed_mutex> interface_lock(interface_mutex);
   if (!sBluetoothAvrcpInterface) {
@@ -929,7 +929,7 @@ static jboolean updatePlayStatusToStack(JNIEnv *env ,jobject object, jint playSt
   }
   return (status == BT_STATUS_SUCCESS) ? JNI_TRUE : JNI_FALSE;
 }
-static jboolean getListPlayerappAttrRspNative(JNIEnv *env ,jobject object , jbyte numAttr,
+static jboolean getListPlayerappAttrRspNative(JNIEnv *env ,jobject /*object*/, jbyte numAttr,
                                               jbyteArray attrIds , jbyteArray address) {
     bt_status_t status;
     jbyte *addr;
@@ -986,7 +986,7 @@ static jboolean getListPlayerappAttrRspNative(JNIEnv *env ,jobject object , jbyt
     return (status == BT_STATUS_SUCCESS) ? JNI_TRUE : JNI_FALSE;
 }
 
-static jboolean getPlayerAppValueRspNative(JNIEnv *env ,jobject object , jbyte numvalue,
+static jboolean getPlayerAppValueRspNative(JNIEnv *env ,jobject /*object*/, jbyte numvalue,
                                            jbyteArray value ,jbyteArray address)
 {
     bt_status_t status;
@@ -1046,7 +1046,7 @@ static jboolean getPlayerAppValueRspNative(JNIEnv *env ,jobject object , jbyte n
     return (status == BT_STATUS_SUCCESS) ? JNI_TRUE : JNI_FALSE;
 }
 
-static jboolean SendCurrentPlayerValueRspNative(JNIEnv *env, jobject object ,
+static jboolean SendCurrentPlayerValueRspNative(JNIEnv *env, jobject /*object*/,
                                                 jbyte numattr ,jbyteArray value ,jbyteArray address) {
     btrc_player_settings_t *pAttrs = NULL ;
     bt_status_t status;
@@ -1099,7 +1099,7 @@ static jboolean SendCurrentPlayerValueRspNative(JNIEnv *env, jobject object ,
 }
 
 //JNI Method called to Respond to PDU 0x14
-static jboolean SendSetPlayerAppRspNative(JNIEnv *env, jobject object,
+static jboolean SendSetPlayerAppRspNative(JNIEnv *env, jobject /*object*/,
                                         jint attr_status, jbyteArray address)
 {
     bt_status_t status;
@@ -1128,8 +1128,8 @@ static jboolean SendSetPlayerAppRspNative(JNIEnv *env, jobject object,
 }
 
 //JNI Method Called to Respond to PDU 0x15
-static jboolean sendSettingsTextRspNative(JNIEnv *env, jobject object, jint num_attr,
-                                jbyteArray attr,jint length , jobjectArray textArray,
+static jboolean sendSettingsTextRspNative(JNIEnv *env, jobject /*object*/, jint num_attr,
+                                jbyteArray attr, jint /*length*/, jobjectArray textArray,
                                 jbyteArray address) {
     btrc_player_setting_text_t *pAttrs = NULL;
     bt_status_t status;
@@ -1196,8 +1196,8 @@ static jboolean sendSettingsTextRspNative(JNIEnv *env, jobject object, jint num_
 }
 
 //JNI Method Called to respond to PDU 0x16
-static jboolean sendValueTextRspNative(JNIEnv *env, jobject object, jint num_attr,
-                                       jbyteArray attr, jint length , jobjectArray textArray,
+static jboolean sendValueTextRspNative(JNIEnv *env, jobject /*object*/, jint num_attr,
+                                       jbyteArray attr, jint /*length*/, jobjectArray textArray,
                                        jbyteArray address) {
     btrc_player_setting_text_t *pAttrs = NULL;
     bt_status_t status;
@@ -1263,7 +1263,7 @@ static jboolean sendValueTextRspNative(JNIEnv *env, jobject object, jint num_att
     return (status == BT_STATUS_SUCCESS) ? JNI_TRUE : JNI_FALSE;
 }
 
-static jboolean getElementAttrRspNative(JNIEnv* env, jobject object,
+static jboolean getElementAttrRspNative(JNIEnv* env, jobject /*object*/,
                                         jbyteArray address, jbyte numAttr,
                                         jintArray attrIds,
                                         jobjectArray textArray) {
@@ -1336,7 +1336,7 @@ static jboolean getElementAttrRspNative(JNIEnv* env, jobject object,
   return (status == BT_STATUS_SUCCESS) ? JNI_TRUE : JNI_FALSE;
 }
 
-static jboolean getItemAttrRspNative(JNIEnv* env, jobject object,
+static jboolean getItemAttrRspNative(JNIEnv* env, jobject /*object*/,
                                      jbyteArray address, jint rspStatus,
                                      jbyte numAttr, jintArray attrIds,
                                      jobjectArray textArray) {
@@ -1405,7 +1405,7 @@ static jboolean getItemAttrRspNative(JNIEnv* env, jobject object,
   return (status == BT_STATUS_SUCCESS) ? JNI_TRUE : JNI_FALSE;
 }
 
-static jboolean registerNotificationPlayerAppRspNative(JNIEnv *env, jobject object ,jint type,
+static jboolean registerNotificationPlayerAppRspNative(JNIEnv *env, jobject /*object*/, jint type,
                                                 jbyte numattr ,jbyteArray value ,
                                                 jbyteArray address) {
     bt_status_t status;
@@ -1464,7 +1464,7 @@ static jboolean registerNotificationPlayerAppRspNative(JNIEnv *env, jobject obje
 }
 
 static jboolean registerNotificationRspPlayStatusNative(JNIEnv* env,
-                                                        jobject object,
+                                                        jobject /*object*/,
                                                         jint type,
                                                         jint playStatus,
                                                         jbyteArray address) {
@@ -1500,7 +1500,7 @@ static jboolean registerNotificationRspPlayStatusNative(JNIEnv* env,
 }
 
 static jboolean registerNotificationRspTrackChangeNative(JNIEnv* env,
-                                                         jobject object,
+                                                         jobject /*object*/,
                                                          jint type,
                                                          jbyteArray track,
                                                          jbyteArray address) {
@@ -1547,7 +1547,7 @@ static jboolean registerNotificationRspTrackChangeNative(JNIEnv* env,
 }
 
 static jboolean registerNotificationRspPlayPosNative(JNIEnv* env,
-                                                     jobject object, jint type,
+                                                     jobject /*object*/, jint type,
                                                      jint playPos,
                                                      jbyteArray address) {
   std::unique_lock<std::shared_timed_mutex> interface_lock(interface_mutex);
@@ -1582,7 +1582,7 @@ static jboolean registerNotificationRspPlayPosNative(JNIEnv* env,
 }
 
 static jboolean registerNotificationRspNowPlayingChangedNative(JNIEnv* env,
-                                                               jobject object,
+                                                               jobject /*object*/,
                                                                jint type,
                                                                jbyteArray address) {
   std::unique_lock<std::shared_timed_mutex> interface_lock(interface_mutex);
@@ -1615,7 +1615,7 @@ static jboolean registerNotificationRspNowPlayingChangedNative(JNIEnv* env,
 }
 
 static jboolean registerNotificationRspUIDsChangedNative(JNIEnv* env,
-                                                         jobject object,
+                                                         jobject /*object*/,
                                                          jint type,
                                                          jint uidCounter,
                                                          jbyteArray address) {
@@ -1651,7 +1651,7 @@ static jboolean registerNotificationRspUIDsChangedNative(JNIEnv* env,
 }
 
 static jboolean registerNotificationRspAddrPlayerChangedNative(
-    JNIEnv* env, jobject object, jint type, jint playerId, jint uidCounter,
+    JNIEnv* env, jobject /*object*/, jint type, jint playerId, jint uidCounter,
     jbyteArray address) {
   std::unique_lock<std::shared_timed_mutex> interface_lock(interface_mutex);
   if (!sBluetoothAvrcpInterface) {
@@ -1687,7 +1687,7 @@ static jboolean registerNotificationRspAddrPlayerChangedNative(
 }
 
 static jboolean registerNotificationRspAvalPlayerChangedNative(JNIEnv* env,
-                                                          jobject object,
+                                                          jobject /*object*/,
                                                           jint type,
                                                           jbyteArray address) {
   std::unique_lock<std::shared_timed_mutex> interface_lock(interface_mutex);
@@ -1722,7 +1722,7 @@ static jboolean registerNotificationRspAvalPlayerChangedNative(JNIEnv* env,
   return (status == BT_STATUS_SUCCESS) ? JNI_TRUE : JNI_FALSE;
 }
 
-static jboolean setVolumeNative(JNIEnv* env, jobject object, jint volume, jbyteArray address) {
+static jboolean setVolumeNative(JNIEnv* env, jobject /*object*/, jint volume, jbyteArray address) {
   std::unique_lock<std::shared_timed_mutex> interface_lock(interface_mutex);
   if (!sBluetoothAvrcpInterface) {
     ALOGE("%s: sBluetoothAvrcpInterface is null", __func__);
@@ -1753,7 +1753,7 @@ static jboolean setVolumeNative(JNIEnv* env, jobject object, jint volume, jbyteA
 
 /* native response for scope as Media player */
 static jboolean mediaPlayerListRspNative(
-    JNIEnv* env, jobject object, jbyteArray address, jint rspStatus,
+    JNIEnv* env, jobject /*object*/, jbyteArray address, jint rspStatus,
     jint uidCounter, jbyte itemType, jint numItems, jintArray playerIds,
     jbyteArray playerTypes, jintArray playerSubtypes,
     jbyteArray playStatusValues, jshortArray featureBitmask,
@@ -2004,7 +2004,7 @@ static jboolean getFolderItemsRspNative(
   return (status == BT_STATUS_SUCCESS) ? JNI_TRUE : JNI_FALSE;
 }
 
-static jboolean setAddressedPlayerRspNative(JNIEnv* env, jobject object,
+static jboolean setAddressedPlayerRspNative(JNIEnv* env, jobject /*object*/,
                                             jbyteArray address,
                                             jint rspStatus) {
   std::unique_lock<std::shared_timed_mutex> interface_lock(interface_mutex);
@@ -2035,7 +2035,7 @@ static jboolean setAddressedPlayerRspNative(JNIEnv* env, jobject object,
   return (status == BT_STATUS_SUCCESS) ? JNI_TRUE : JNI_FALSE;
 }
 
-static jboolean setBrowsedPlayerRspNative(JNIEnv* env, jobject object,
+static jboolean setBrowsedPlayerRspNative(JNIEnv* env, jobject /*object*/,
                                           jbyteArray address, jint rspStatus,
                                           jbyte depth, jint numItems,
                                           jobjectArray textArray) {
@@ -2106,7 +2106,7 @@ static jboolean setBrowsedPlayerRspNative(JNIEnv* env, jobject object,
   return (status == BT_STATUS_SUCCESS) ? JNI_TRUE : JNI_FALSE;
 }
 
-static jboolean changePathRspNative(JNIEnv* env, jobject object,
+static jboolean changePathRspNative(JNIEnv* env, jobject /*object*/,
                                     jbyteArray address, jint rspStatus,
                                     jint numItems) {
   std::unique_lock<std::shared_timed_mutex> interface_lock(interface_mutex);
@@ -2138,7 +2138,7 @@ static jboolean changePathRspNative(JNIEnv* env, jobject object,
   return (status == BT_STATUS_SUCCESS) ? JNI_TRUE : JNI_FALSE;
 }
 
-static jboolean searchRspNative(JNIEnv* env, jobject object, jbyteArray address,
+static jboolean searchRspNative(JNIEnv* env, jobject /*object*/, jbyteArray address,
                                 jint rspStatus, jint uidCounter,
                                 jint numItems) {
   std::unique_lock<std::shared_timed_mutex> interface_lock(interface_mutex);
@@ -2171,7 +2171,7 @@ static jboolean searchRspNative(JNIEnv* env, jobject object, jbyteArray address,
   return (status == BT_STATUS_SUCCESS) ? JNI_TRUE : JNI_FALSE;
 }
 
-static jboolean playItemRspNative(JNIEnv* env, jobject object,
+static jboolean playItemRspNative(JNIEnv* env, jobject /*object*/,
                                   jbyteArray address, jint rspStatus) {
   std::unique_lock<std::shared_timed_mutex> interface_lock(interface_mutex);
   if (!sBluetoothAvrcpInterface) {
@@ -2201,7 +2201,7 @@ static jboolean playItemRspNative(JNIEnv* env, jobject object,
   return (status == BT_STATUS_SUCCESS) ? JNI_TRUE : JNI_FALSE;
 }
 
-static jboolean getTotalNumOfItemsRspNative(JNIEnv* env, jobject object,
+static jboolean getTotalNumOfItemsRspNative(JNIEnv* env, jobject /*object*/,
                                             jbyteArray address, jint rspStatus,
                                             jint uidCounter, jint numItems) {
   std::unique_lock<std::shared_timed_mutex> interface_lock(interface_mutex);
@@ -2233,7 +2233,7 @@ static jboolean getTotalNumOfItemsRspNative(JNIEnv* env, jobject object,
   return (status == BT_STATUS_SUCCESS) ? JNI_TRUE : JNI_FALSE;
 }
 
-static jboolean addToNowPlayingRspNative(JNIEnv* env, jobject object,
+static jboolean addToNowPlayingRspNative(JNIEnv* env, jobject /*object*/,
                                          jbyteArray address, jint rspStatus) {
   std::unique_lock<std::shared_timed_mutex> interface_lock(interface_mutex);
   if (!sBluetoothAvrcpInterface) {
@@ -2264,7 +2264,7 @@ static jboolean addToNowPlayingRspNative(JNIEnv* env, jobject object,
 }
 
 static jboolean isDeviceActiveInHandOffNative(JNIEnv *env,
-                                              jobject object,
+                                              jobject /*object*/,
                                               jbyteArray address) {
     bt_status_t status = BT_STATUS_SUCCESS;
     jbyte *addr;
@@ -2373,10 +2373,10 @@ int register_com_android_bluetooth_avrcp_ext(JNIEnv* env) {
  *
  * returns true on succes, false otherwise.
 */
-static bool copy_item_attributes(JNIEnv* env, jobject object,
+static bool copy_item_attributes(JNIEnv* env, jobject /*object*/,
                                  btrc_folder_items_t* pitem,
                                  jint* p_attributesIds,
-                                 jobjectArray attributesArray, int item_idx,
+                                 jobjectArray attributesArray, int /*item_idx*/,
                                  int attribCopiedIndex) {
   bool success = true;
 

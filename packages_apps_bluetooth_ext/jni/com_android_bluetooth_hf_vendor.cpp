@@ -134,7 +134,7 @@ static void initNative(JNIEnv *env, jobject object) {
     mCallbacksObj = env->NewGlobalRef(object);
 }
 
-static void cleanupNative(JNIEnv *env, jobject object) {
+static void cleanupNative(JNIEnv *env, jobject /*object*/) {
     const bt_interface_t* btInf;
 
     if ( (btInf = getBluetoothInterface()) == NULL) {
@@ -157,7 +157,7 @@ static void cleanupNative(JNIEnv *env, jobject object) {
 }
 
 /* native interface */
-static jint enableSwbNative(JNIEnv* env, jobject thiz, jboolean enable)
+static jint enableSwbNative(JNIEnv* /*env*/, jobject /*thiz*/, jboolean enable)
 {
     if (sBluetoothVendorHfInterface == NULL) {
         ALOGE("No Interface initialized");

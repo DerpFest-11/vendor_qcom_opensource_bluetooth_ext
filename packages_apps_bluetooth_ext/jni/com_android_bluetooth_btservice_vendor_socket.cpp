@@ -40,7 +40,7 @@ namespace android {
 static btvendor_socket_interface_t *sBluetoothVendorSocketInterface = NULL;
 static jobject mCallbacksObj = NULL;
 
-static void classInitNative(JNIEnv* env, jclass clazz) {
+static void classInitNative(JNIEnv* /*env*/, jclass /*clazz*/) {
 
      ALOGI("%s: succeeds", __FUNCTION__);
 }
@@ -75,7 +75,7 @@ static void initNative(JNIEnv *env, jobject object) {
     mCallbacksObj = env->NewGlobalRef(object);
 }
 
-static void cleanupNative(JNIEnv *env, jobject object) {
+static void cleanupNative(JNIEnv *env, jobject /*object*/) {
     const bt_interface_t* btInf;
 
     if ( (btInf = getBluetoothInterface()) == NULL) {
@@ -98,7 +98,7 @@ static void cleanupNative(JNIEnv *env, jobject object) {
 }
 
 
-static int getSocketOptNative(JNIEnv *env, jobject obj, jint type, jint channel, jint optionName,
+static int getSocketOptNative(JNIEnv *env, jobject /*obj*/, jint type, jint channel, jint optionName,
                                         jbyteArray optionVal) {
     ALOGV("%s:",__FUNCTION__);
 
@@ -129,7 +129,7 @@ Fail:
     return -1;
 }
 
-static int setSocketOptNative(JNIEnv *env, jobject obj, jint type, jint channel, jint optionName,
+static int setSocketOptNative(JNIEnv *env, jobject /*obj*/, jint type, jint channel, jint optionName,
                                         jbyteArray optionVal, jint optionLen) {
     ALOGV("%s:",__FUNCTION__);
 

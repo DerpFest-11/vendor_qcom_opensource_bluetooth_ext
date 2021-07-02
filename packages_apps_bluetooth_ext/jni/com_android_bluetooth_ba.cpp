@@ -163,7 +163,7 @@ static void initNative(JNIEnv* env, jobject object) {
   ALOGI("%s: Success ", __func__);
 }
 
-static void cleanupNative(JNIEnv* env, jobject object) {
+static void cleanupNative(JNIEnv* env, jobject /*object*/) {
   const bt_interface_t* btInf = getBluetoothInterface();
   if (btInf == NULL) {
     ALOGE("Bluetooth module is not loaded");
@@ -181,7 +181,7 @@ static void cleanupNative(JNIEnv* env, jobject object) {
   }
 }
 
-static void refreshEncKeyNative(JNIEnv* env, jobject object) {
+static void refreshEncKeyNative(JNIEnv* /*env*/, jobject /*object*/) {
     if (sBATInterface == NULL) {
       ALOGE("Failed to get BA Transmitter Interface in refreshEncKeyNative");
       return;
@@ -189,7 +189,7 @@ static void refreshEncKeyNative(JNIEnv* env, jobject object) {
     sBATInterface->refresh_enc_key();
 }
 
-static void setBAStateNative(JNIEnv* env, jobject object, jint state) {
+static void setBAStateNative(JNIEnv* /*env*/, jobject /*object*/, jint state) {
     if (sBATInterface == NULL) {
       ALOGE("Failed to get BA Transmitter Interface in setBAStateNative ");
       return;
@@ -197,7 +197,7 @@ static void setBAStateNative(JNIEnv* env, jobject object, jint state) {
     sBATInterface->set_state(state);
 }
 
-static void setVolNative(JNIEnv* env, jobject object, jint volLevel, jint maxVolLevel) {
+static void setVolNative(JNIEnv* /*env*/, jobject /*object*/, jint volLevel, jint maxVolLevel) {
     if (sBATInterface == NULL) {
       ALOGE("Failed to get BA Transmitter Interface in setVolNative ");
       return;

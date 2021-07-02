@@ -423,7 +423,7 @@ static void initNative(JNIEnv *env, jobject object) {
     sBluetoothVendorInterface->set_property_callouts(&sBluetoothPropertyCallout);
 }
 
-static void cleanupNative(JNIEnv *env, jobject object) {
+static void cleanupNative(JNIEnv *env, jobject /*object*/) {
     const bt_interface_t* btInf;
 
     std::unique_lock<std::shared_timed_mutex> interface_lock(interface_mutex);
@@ -453,7 +453,7 @@ static void cleanupNative(JNIEnv *env, jobject object) {
 
 }
 
-static bool informTimeoutToHidlNative(JNIEnv *env, jobject obj) {
+static bool informTimeoutToHidlNative(JNIEnv* /*env*/, jobject /*obj*/) {
 
     ALOGI("%s", __FUNCTION__);
 
@@ -470,7 +470,7 @@ static bool informTimeoutToHidlNative(JNIEnv *env, jobject obj) {
     return JNI_TRUE;
 }
 
-static bool bredrcleanupNative(JNIEnv *env, jobject obj) {
+static bool bredrcleanupNative(JNIEnv* /*env*/, jobject /*obj*/) {
 
     ALOGI("%s", __FUNCTION__);
 
@@ -488,7 +488,7 @@ static bool bredrcleanupNative(JNIEnv *env, jobject obj) {
     return JNI_TRUE;
 }
 
-static bool bredrstartupNative(JNIEnv *env, jobject obj) {
+static bool bredrstartupNative(JNIEnv* /*env*/, jobject /*obj*/) {
 
     ALOGI("%s", __FUNCTION__);
 
@@ -499,7 +499,7 @@ static bool bredrstartupNative(JNIEnv *env, jobject obj) {
     return JNI_TRUE;
 }
 
-static bool hcicloseNative(JNIEnv *env, jobject obj) {
+static bool hcicloseNative(JNIEnv* /*env*/, jobject /*obj*/) {
 
     ALOGI("%s", __FUNCTION__);
 
@@ -510,7 +510,7 @@ static bool hcicloseNative(JNIEnv *env, jobject obj) {
     return JNI_TRUE;
 }
 
-static bool setWifiStateNative(JNIEnv *env, jobject obj, jboolean status) {
+static bool setWifiStateNative(JNIEnv* /*env*/, jobject /*obj*/, jboolean status) {
 
     ALOGI("%s", __FUNCTION__);
 
@@ -521,7 +521,7 @@ static bool setWifiStateNative(JNIEnv *env, jobject obj, jboolean status) {
     return JNI_TRUE;
 }
 
-static bool setPowerBackoffNative(JNIEnv *env, jobject obj, jboolean status) {
+static bool setPowerBackoffNative(JNIEnv* /*env*/, jobject /*obj*/, jboolean status) {
 
     ALOGI("%s", __FUNCTION__);
 
@@ -532,7 +532,7 @@ static bool setPowerBackoffNative(JNIEnv *env, jobject obj, jboolean status) {
     return JNI_TRUE;
 }
 
-static bool getProfileInfoNative(JNIEnv *env, jobject obj, jint profile_id , jint profile_info) {
+static bool getProfileInfoNative(JNIEnv* /*env*/, jobject /*obj*/, jint profile_id , jint profile_info) {
 
     ALOGI("%s", __FUNCTION__);
 
@@ -549,7 +549,7 @@ static bool getQtiStackStatusNative() {
     return (sBluetoothVendorInterface != NULL);
 }
 
-static jboolean voipNetworkWifiInfoNative(JNIEnv *env, jobject object,
+static jboolean voipNetworkWifiInfoNative(JNIEnv* /*env*/, jobject /*object*/,
                                            jboolean isVoipStarted, jboolean isNetworkWifi) {
     bt_status_t status;
     if (!sBluetoothVendorInterface) return JNI_FALSE;
@@ -578,25 +578,25 @@ static jstring getA2apOffloadCapabilityNative(JNIEnv* env) {
     return env->NewStringUTF(a2dp_offload_Cap);
 }
 
-static jboolean isSplitA2dpEnabledNative(JNIEnv* env) {
+static jboolean isSplitA2dpEnabledNative(JNIEnv* /*env*/) {
 
     ALOGI("%s", __FUNCTION__);
     return spilt_a2dp_supported;
 }
 
-static jboolean isSwbEnabledNative(JNIEnv* env) {
+static jboolean isSwbEnabledNative(JNIEnv* /*env*/) {
 
     ALOGI("%s", __FUNCTION__);
     return swb_supported;
 }
 
-static jboolean isSwbPmEnabledNative(JNIEnv* env) {
+static jboolean isSwbPmEnabledNative(JNIEnv* /*env*/) {
 
     ALOGI("%s", __FUNCTION__);
     return swb_pm_supported;
 }
 
-static jboolean setClockSyncConfigNative(JNIEnv* env, jobject object, jboolean enable, jint mode,
+static jboolean setClockSyncConfigNative(JNIEnv* /*env*/, jobject /*object*/, jboolean enable, jint mode,
     jint adv_interval, jint channel, jint jitter, jint offset)
 {
     if (!sBluetoothVendorInterface) return false;
@@ -604,14 +604,14 @@ static jboolean setClockSyncConfigNative(JNIEnv* env, jobject object, jboolean e
         channel, jitter, offset);
 }
 
-static jboolean startClockSyncNative(JNIEnv* env)
+static jboolean startClockSyncNative(JNIEnv* /*env*/)
 {
     if (!sBluetoothVendorInterface) return false;
     sBluetoothVendorInterface->start_clock_sync();
     return true;
 }
 
-static jboolean interopMatchAddrNative(JNIEnv* env, jclass clazz,
+static jboolean interopMatchAddrNative(JNIEnv* env, jclass /*clazz*/,
       jstring feature_name, jstring address) {
   ALOGV("%s", __func__);
 
@@ -649,7 +649,7 @@ static jboolean interopMatchAddrNative(JNIEnv* env, jclass clazz,
   return matched ? JNI_TRUE : JNI_FALSE;
 }
 
-static jboolean interopMatchNameNative(JNIEnv* env, jclass clazz,
+static jboolean interopMatchNameNative(JNIEnv* env, jclass /*clazz*/,
       jstring feature_name, jstring name) {
   ALOGV("%s", __func__);
 
@@ -680,7 +680,7 @@ static jboolean interopMatchNameNative(JNIEnv* env, jclass clazz,
   return matched ? JNI_TRUE : JNI_FALSE;
 }
 
-static jboolean interopMatchAddrOrNameNative(JNIEnv* env, jclass clazz,
+static jboolean interopMatchAddrOrNameNative(JNIEnv* env, jclass /*clazz*/,
       jstring feature_name, jstring address) {
   ALOGV("%s", __func__);
 
@@ -718,7 +718,7 @@ static jboolean interopMatchAddrOrNameNative(JNIEnv* env, jclass clazz,
   return matched ? JNI_TRUE : JNI_FALSE;
 }
 
-static void interopDatabaseAddRemoveAddrNative(JNIEnv* env, jclass clazz,
+static void interopDatabaseAddRemoveAddrNative(JNIEnv* env, jclass /*clazz*/,
       jboolean do_add, jstring feature_name, jstring address, jint length) {
   ALOGV("%s", __func__);
 
@@ -761,7 +761,7 @@ static void interopDatabaseAddRemoveAddrNative(JNIEnv* env, jclass clazz,
   env->ReleaseStringUTFChars(feature_name, feature_name_str);
 }
 
-static void interopDatabaseAddRemoveNameNative(JNIEnv* env, jclass clazz,
+static void interopDatabaseAddRemoveNameNative(JNIEnv* env, jclass /*clazz*/,
       jboolean do_add, jstring feature_name, jstring name) {
   ALOGV("%s", __func__);
 
