@@ -1729,7 +1729,7 @@ static jboolean setVolumeNative(JNIEnv* env, jobject /*object*/, jint volume, jb
     return JNI_FALSE;
   }
 
-  ALOGI("%s: volume: %u", __func__, volume, (uint8_t) volume);
+  ALOGI("%s: volume: %u", __func__, volume);
 
   if (!address) {
     ALOGE("%s: device address is null", __func__);
